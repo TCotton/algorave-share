@@ -1,36 +1,174 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Algorave Share Frontend
+
+Frontend application for Algorave Share, built with Next.js 15, TypeScript, and Effect.
+
+## Features
+
+- ✨ Built with [Next.js 15](https://nextjs.org) and App Router
+- 🎨 Styled with [Tailwind CSS](https://tailwindcss.com/)
+- 📦 TypeScript for type safety
+- 🔧 Effect for composable, type-safe API calls
+- 🎵 Designed for sharing Strudel and TidalCycles creations
 
 ## Getting Started
 
-First, run the development server:
+### Install Dependencies
+
+```bash
+npm install
+```
+
+### Development Server
 
 ```bash
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Open [http://localhost:3000](http://localhost:3000) to see the application.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+### Build for Production
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+```bash
+npm run build
+npm start
+```
+
+## Project Structure
+
+```
+frontend/
+├── app/
+│   ├── page.tsx           # Home page
+│   ├── layout.tsx         # Root layout
+│   ├── globals.css        # Global styles
+│   ├── share/
+│   │   └── page.tsx       # Share code page
+│   └── browse/
+│       └── page.tsx       # Browse shares page
+├── lib/
+│   └── services/
+│       └── api.ts         # Effect-based API service
+├── public/                # Static assets
+└── package.json
+```
+
+## Pages
+
+### Home (`/`)
+Landing page with project overview and navigation to other pages.
+
+### Share (`/share`)
+Form for sharing Strudel or TidalCycles code with optional audio upload.
+
+### Browse (`/browse`)
+Gallery view of shared creations from the community.
+
+## Effect Services
+
+The frontend uses Effect for type-safe API communication:
+
+```typescript
+import { Effect } from "effect";
+import { ApiService, provideApiService } from "@/lib/services/api";
+
+// Example usage
+const getSharesEffect = Effect.gen(function* () {
+  const service = yield* ApiService;
+  const shares = yield* service.getShares();
+  return shares;
+});
+
+// Run with live service
+const shares = await Effect.runPromise(
+  provideApiService(getSharesEffect)
+);
+```
+
+## Configuration
+
+### Environment Variables
+
+Create a `.env.local` file:
+
+```env
+NEXT_PUBLIC_API_URL=http://localhost:3001
+```
+
+### Tailwind Configuration
+
+Tailwind is configured in `tailwind.config.ts` with the following features:
+- Gradient backgrounds
+- Custom color palette for algorave theme
+- Responsive utilities
+
+## Development
+
+### Code Style
+
+- Use TypeScript for all components
+- Use React Server Components by default
+- Mark client components with `"use client"`
+- Use Effect for API calls and side effects
+- Follow Tailwind utility-first approach
+
+### Adding New Pages
+
+1. Create a new directory in `app/`
+2. Add a `page.tsx` file
+3. Use the App Router conventions
+
+Example:
+
+```typescript
+// app/new-page/page.tsx
+export default function NewPage() {
+  return <div>New Page Content</div>;
+}
+```
+
+## Styling
+
+This project uses Tailwind CSS with a custom theme optimized for the algorave aesthetic:
+
+- Dark backgrounds with vibrant gradients
+- Purple and pink accent colors
+- Glassmorphism effects with backdrop blur
+- Responsive design
+
+## Scripts
+
+```bash
+npm run dev     # Start development server
+npm run build   # Build for production
+npm run start   # Start production server
+npm run lint    # Run ESLint
+```
+
+## Deployment
+
+### Vercel (Recommended)
+
+The easiest way to deploy is using [Vercel](https://vercel.com):
+
+```bash
+npm install -g vercel
+vercel
+```
+
+### Other Platforms
+
+This is a standard Next.js application and can be deployed to:
+- AWS Amplify
+- Netlify
+- Docker
+- Traditional Node.js hosting
+
+See [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
 
 ## Learn More
 
-To learn more about Next.js, take a look at the following resources:
+- [Next.js Documentation](https://nextjs.org/docs)
+- [Effect Documentation](https://effect.website/)
+- [Tailwind CSS Documentation](https://tailwindcss.com/docs)
+- [TypeScript Documentation](https://www.typescriptlang.org/docs/)
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
