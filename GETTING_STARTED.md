@@ -8,10 +8,25 @@ Before you begin, ensure you have the following installed:
 
 - **Node.js** 20.x or higher
 - **npm** 10.x or higher
+- **Docker** (optional, for containerized development)
 - **Terraform** 1.0 or higher (for infrastructure deployment)
 - **AWS CLI** configured with credentials (for infrastructure deployment)
 
 ## Quick Start
+
+### Option 1: Docker (Recommended)
+
+The easiest way to get started is using Docker Compose:
+
+```bash
+git clone https://github.com/TCotton/algorave-share.git
+cd algorave-share
+docker-compose up
+```
+
+This will start both frontend (http://localhost:3000) and backend (http://localhost:3001).
+
+### Option 2: Manual Setup
 
 ### 1. Clone the Repository
 
