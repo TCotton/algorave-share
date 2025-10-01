@@ -1,0 +1,25 @@
+{
+  "name": "algorave-share-backend",
+  "version": "1.0.0",
+  "type": "module",
+  "main": "dist/index.js",
+  "scripts": {
+    "dev": "tsx watch src/index.ts",
+    "build": "tsc",
+    "start": "node dist/index.js"
+  },
+  "keywords": ["algorave", "strudel", "tidalcycles", "effect"],
+  "author": "Andrew Walpole",
+  "license": "MIT",
+  "description": "Backend API for Algorave Share using Effect",
+  "dependencies": {
+    "@effect/platform": "^0.92.0",
+    "@effect/platform-node": "^0.98.0",
+    "effect": "^3.18.0"
+  },
+  "devDependencies": {
+    "@types/node": "^24.6.0",
+    "tsx": "^4.20.6",
+    "typescript": "^5.9.2"
+  }
+}
